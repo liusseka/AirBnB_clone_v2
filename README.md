@@ -1,9 +1,9 @@
 # 0x02. AirBnB clone - MySQL 
--------
+
 ## Overview  
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
-------
+
 
 ## Project Repository Components
 | Component               | Description                                | Folder/File                      |
@@ -15,60 +15,46 @@ This repository contains the initial stage of a student project to build a clone
 | Project Unittests       | Defines project test cases                 | [Unittests](./tests)             |
 | Web Static              | defines project structure: html and css    | [Web Static](./web_static)  |
 
------
 
-## General Use
 
-1. First clone this repository.
-
-3. Once the repository is cloned locate the "console.py" file and run it as follows:
-```
+## General Use  
+1. Clone this repository.
+2. Locate and run `console.py` as follows:
+``` 
 /AirBnB_clone$ ./console.py
 ```
-4. When this command is run the following prompt should appear:
+3. Running the console will display the following prompt:
 ```
 (hbnb)
 ```
-5. This prompt designates you are in the "HBnB" console. There are a variety of commands available within the console program.
-
------
+3. Input commands after the prompt and press enter.
+```
+Example:
+(hbnb) create Place
+```
 
 ## Commands
 + `create` - Creates an instance based on given class
-
 + `destroy` - Destroys an object based on class and UUID
-
 + `show` - Shows an object based on class and UUID
-
 + `all` - Shows all objects the program has access to, or all objects of a given class
-
 + `update` - Updates existing attributes an object based on class name and UUID
-
 + `quit` - Exits the program (EOF will as well)
 
-------
 
 ## Alternative Syntax
 Users are able to issue a number of console command using an alternative syntax:
-
-	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
+	`Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])`
 Advanced syntax is implemented for the following commands: 
++ `all` - Shows all objects the program has access to, or all objects of a given class
++ `count` - Return number of object instances by class
++ `show` - Shows an object based on class and UUID
++ `destroy` - Destroys an object based on class and UUID
++ `update` - Updates existing attributes an object based on class name and UUID
 
-    * all - Shows all objects the program has access to, or all objects of a given class
-
-	* count - Return number of object instances by class
-
-    * show - Shows an object based on class and UUID
-
-	* destroy - Destroys an object based on class and UUID
-
-    * update - Updates existing attributes an object based on class name and UUID
-
-------
 
 ## Examples  
-### Primary Command Syntax
-
+### Primary Command Syntax  
 **Example 0: Create an object**  
 Usage: create <class_name>
 ```
