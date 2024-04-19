@@ -1,4 +1,5 @@
 # 0x02. AirBnB clone - MySQL  
+## Overview  
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---
@@ -11,7 +12,7 @@ This repository contains the initial stage of a student project to build a clone
 | Project Models - Engine | Defines project storage                    | [Storage Engine](./models/engine)|
 | Project Models - Classes| Defines project objects                    | [Classes](./models)              |
 | Project Unittests       | Defines project test cases                 | [Unittests](./tests)             |
-| Web Static              | defines project structure: html and css | [Web Static](./web_static)          |
+| Web Static              | defines project structure: html and css    | [Web Static](./web_static)  |
 
 ## General Use
 
