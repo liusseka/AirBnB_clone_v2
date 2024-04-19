@@ -4,7 +4,8 @@ This repository contains the initial stage of a student project to build a clone
 ---
 
 ## Project Repository Components
-| Component  | Description  | Folder/File |   
+| Component  | Description  | Folder/File |
+|------------|--------------|-------------|   
 
 
 ## General Use
