@@ -4,11 +4,14 @@ This repository contains the initial stage of a student project to build a clone
 ---
 
 ## Project Repository Components
-| Component          | Description                                | Folder/File                      |
-|--------------------|--------------------------------------------|----------------------------------|   
-| Project Authors    | The contributors of this project           | [Authors](./AUTHORS)        |
-| Project Console    | Manages storage and objects                | ./AirBnB_clone_v2/console.py     |
-| Project Models     | Defines how objects are created and stored | ./AirBnB_clone_v2/models         |
+| Component               | Description                                | Folder/File                      |
+|-------------------------|--------------------------------------------|----------------------------------|  
+| Project Authors         | The contributors of this project           | [!Authors](./AUTHORS)            |
+| Project Console         | Manages storage & objects                  | [!Console](./console.py)         |
+| Project Models - Engine | Defines project storage                    | [Storage Engine](./models/engine)|
+| Project Models - Classes| Defines project objects                    | [Classes](./models)              |
+| Project Unittests       | Defines project test cases                 | [Unittests](./tests)             |
+| Web Static              | defines project structure: html and css | [Web Static](./web_static)          |
 
 ## General Use
 
