@@ -15,6 +15,8 @@ This repository contains the initial stage of a student project to build a clone
 | Project Unittests       | Defines project test cases                 | [Unittests](./tests)             |
 | Web Static              | defines project structure: html and css    | [Web Static](./web_static)  |
 
+-----
+
 ## General Use
 
 1. First clone this repository.
