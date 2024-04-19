@@ -33,7 +33,7 @@ This repository contains the initial stage of a student project to build a clone
 
 -----
 
-### Commands
+## Commands
 + `create` - Creates an instance based on given class
 
 + `destroy` - Destroys an object based on class and UUID
@@ -48,7 +48,7 @@ This repository contains the initial stage of a student project to build a clone
 
 ------
 
-### Alternative Syntax
+## Alternative Syntax
 Users are able to issue a number of console command using an alternative syntax:
 
 	Usage: <class_name>.<command>([<id>[name_arg value_arg]|[kwargs]])
@@ -66,7 +66,7 @@ Advanced syntax is implemented for the following commands:
 
 ------
 
-## h2>Examples  
+## Examples  
 ### Primary Command Syntax
 
 **Example 0: Create an object**  
