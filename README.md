@@ -6,8 +6,8 @@ This repository contains the initial stage of a student project to build a clone
 ## Project Repository Components
 | Component               | Description                                | Folder/File                      |
 |-------------------------|--------------------------------------------|----------------------------------|  
-| Project Authors         | The contributors of this project           | [!Authors](./AUTHORS)            |
-| Project Console         | Manages storage & objects                  | [!Console](./console.py)         |
+| Project Authors         | The contributors of this project           | [Authors](./AUTHORS)            |
+| Project Console         | Manages storage & objects                  | [Console](./console.py)         |
 | Project Models - Engine | Defines project storage                    | [Storage Engine](./models/engine)|
 | Project Models - Classes| Defines project objects                    | [Classes](./models)              |
 | Project Unittests       | Defines project test cases                 | [Unittests](./tests)             |
