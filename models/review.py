@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class Review(BaseModel, Base):
-    """ Review classto store review information """
+    """ Defines and maps reviews tables for storing objects """
     __tablename__ = "reviews"
 
     place_id = Column(String(60), ForeignKey("places.id"), nullable=False)

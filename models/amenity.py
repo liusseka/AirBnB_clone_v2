@@ -8,7 +8,7 @@ from models.place import place_amenity
 
 
 class Amenity(BaseModel, Base):
-    """ Defines and Maps the Amenity tables """
+    """ Defines and Maps the Amenity tables for storing objects """
     __tablename__ = "amenities"
 
     name = Column(String(128), nullable=False)

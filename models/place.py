@@ -54,7 +54,7 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            """ Returns the place reviews """
+            """ Returns the place reviews objects """
             items = models.storage.all()
             list_items = []
             result = []
