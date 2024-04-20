@@ -53,7 +53,7 @@ class DBStorage:
             dict: A dictionary where keys are in the format "<class_name>.<id>"
                   and values are the corresponding objects.
         """
-        dict = {}
+        dic = {}
         if cls:
             if type(cls) is str:
                 cls = eval(cls)
