@@ -79,26 +79,22 @@ class DBStorage:
         self.__session.add(obj)
 
     def save(self) -> None:
-        """Commits all changes to the database."""
+        """ Commits all changes to the database. """
         self.__session.commit()
 
     def delete(self, obj: object = None) -> None:
-        """Deletes an object from the session.
-
-        Args:
-            obj (object, optional): The object to be deleted. Defaults to None.
-        """
+        """ Deletes an object from the session """
         if obj:
             self.__session.delete(obj)
 
     def reload(self) -> None:
-        """Creates database tables and initializes a session factory."""
+        """ Creates tables and initializes a session """
         Base.metadata.create_all(self.__engine)
         sec = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sec)
         self.__session = Session()
 
     def close(self) -> None:
-        """Closes the current session."""
+        """ close session """
         self.__session.close()
 
