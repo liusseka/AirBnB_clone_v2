@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+from datetime import datetime
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -112,46 +113,33 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Overrides the emptyline method of CMD """
         pass
-
     def do_create(self, arg):
-        """Create a new instance of a class"""
+        """Create a new instance of BaseModel, save it (to the JSON file)
+        and prints the id"""
         if not arg:
             print("** class name missing **")
             return
-
-        # Split the argument into class name and parameters
-        class_name, *params = arg.split()
-
-        # Check if the class exists in the dictionary of available classes
+        args = arg.split(" ")
+        class_name = args[0]
         if class_name not in self.classes:
             print("** class doesn't exist **")
             return
-
-        # Initialize an empty dictionary to store parameter key-value pairs
         param_dict = {}
-
-        # Loop through the parameters and parse them
-        for param in params:
-            # Split each parameter into key and value
-            key, value = param.split('=')
-
-            # Strip quotes from the value if it's a string
-            if value.startswith('"') and value.endswith('"'):
-                value = value[1:-1]
-
-            # Replace underscores with spaces in the value
-            value = value.replace('_', ' ')
-
-            # Store the key-value pair in the parameter dictionary
+        for i in args[1:]:
+            key, value = i.split('=')
+            # Handle parameter value formatting
+            if value[0] == '"' and value[-1] == '"':
+                value = value[1:-1].replace('_', ' ')
+            elif '.' in value:
+                value = float(value)
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    continue
             param_dict[key] = value
-
-        # Create a new instance of the specified class with the parsed parameters
         new_instance = self.classes[class_name](**param_dict)
-
-        # Save the new instance to the storage
         new_instance.save()
-
-        # Print the ID of the newly created instance
         print(new_instance.id)
 
     def help_create(self):
