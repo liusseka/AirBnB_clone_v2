@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """A Script that:
  - a Fabric script that distributes an archive to web servers
  - The archive based on the file 1-pack_web_static.py)
