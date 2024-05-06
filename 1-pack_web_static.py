@@ -12,10 +12,15 @@ from fabric.api import local
 def do_pack():
     """Creates a .tgz archive"""
     try:
+        #Obtains time
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         if isdir("versions") is False:
             local("mkdir versions")
+
+        # Creates file name
         file_name = "versions/web_static_{}.tgz".format(date)
+
+        # Creates tgz archive locally
         local("tar -cvzf {} web_static".format(file_name))
         return file_name
     except:
