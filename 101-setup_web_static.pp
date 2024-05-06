@@ -13,8 +13,7 @@ file { [
   '/data/web_static/releases/test',
   '/data/web_static/shared',
 ] :
-  ensure => directory,
-  mode   => '0755', 
+  ensure => directory, mode => '0755', 
 }
 
 # Create an index.html file in the test release directory
@@ -44,8 +43,7 @@ file { [
   '/var/www',
   '/var/www/html',
   ] :
-  ensure => directory,
-  mode   => '0755',
+  ensure => directory, mode => '0755',
 }
 
 # Create an index.html file in the var/www/html directory
