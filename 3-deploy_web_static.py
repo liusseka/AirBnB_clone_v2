@@ -2,8 +2,8 @@
 """Create and distributes an archive to web servers"""
 import os.path
 from datetime import datetime
-from fabric.api import local
-from fabric.operations import env, put, run
+from fabric.api import local, env, put, run
+from os.path import exists, isdir
 env.hosts = ['100.25.109.49', '54.209.222.176']
 env.users = 'ubuntu'
 
@@ -31,7 +31,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """
-        Distributes the archive to the web servers.
+        Uploads the archive to the web servers.
     """
     if os.path.exists(archive_path):
         archived_file = os.path.basename(archive_path)
@@ -41,8 +41,8 @@ def do_deploy(archive_path):
         run(f"sudo mkdir -p {newest_version}")
         run(f"sudo tar -xzf {archived_file} -C {newest_version}/")
         run(f"sudo rm {archived_file}")
-        run(f"sudo mv {newest_version}/web_static/* {newest_version}", pty=True)
-        run(f"sudo rm -rf {newest_version}/web_static", pty=True)
+        run(f"sudo mv {newest_version}/web_static/* {newest_version}")
+        run(f"sudo rm -rf {newest_version}/web_static")
         run("sudo rm -rf /data/web_static/current")
         run(f"sudo ln -s {newest_version} /data/web_static/current")
 
