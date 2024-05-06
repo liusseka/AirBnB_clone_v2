@@ -12,7 +12,10 @@ file { [
   '/data/web_static/releases',
   '/data/web_static/releases/test',
   '/data/web_static/shared',
-] : ensure => directory }
+] :
+  ensure => directory,
+  mode   => '0755', 
+}
 
 # Create an index.html file in the test release directory
 file { '/data/web_static/releases/test/index.html':
@@ -40,11 +43,14 @@ exec { 'chown -R ubuntu:ubuntu /data/': path => '/usr/bin:/usr/local/bin/:/bin/'
 file { [
   '/var/www',
   '/var/www/html',
-  ] : ensure => directory}
+  ] :
+  ensure => directory,
+  mode   => '0755',
+}
 
 # Create an index.html file in the var/www/html directory
 file { '/var/www/html/index.html':
-  ensure => present,
+  ensure  => present,
   content => "
 <!DOCTYPE html>
 <html>
@@ -60,9 +66,9 @@ file { '/var/www/html/index.html':
 
 # Update the default nginx configuration
 exec { 'nginx_conf':
-  environment => ['data=\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}\n'],
-  command => 'sed -i "39i $data" /etc/nginx/sites-enabled/default',
-  path => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
+  environment  => ['data=\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t}\n'],
+  command      => 'sed -i "39i $data" /etc/nginx/sites-enabled/default',
+  path         => '/usr/bin:/usr/sbin:/bin:/usr/local/bin',
 }
 
 # Ensure the nginx service is running
