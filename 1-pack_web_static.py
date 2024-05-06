@@ -11,8 +11,9 @@ from datetime import datetime
 from fabric.api import env, local, mkdir, run
 
 def do_pack():
-  """Generates a .tgz archive of web_static contents and returns its path."""
-
+  """
+  Generates a .tgz archive of web_static contents and returns its path.
+  """
   now = datetime.utcnow()
   timestamp = now.strftime('%Y%m%d%H%M%S')
 
