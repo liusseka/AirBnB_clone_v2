@@ -7,15 +7,28 @@ The Script does the following:
  - Stores all archives in the folder versions
 """
 
-from fabric.api import local
-import time
+from datetime import datetime
+from fabric.api import env, local, mkdir, run
 
 def do_pack():
-    """Archives the web_static folder into a .tgz file"""
+  """Generates a .tgz archive of web_static contents and returns its path."""
+
+  now = datetime.utcnow()
+  timestamp = now.strftime('%Y%m%d%H%M%S')
+
+  archive_name = f"web_static_{timestamp}.tgz"
+  archive_path = f"versions/{archive_name}"
+
+  try:
+    run("mkdir -p versions")
+  except Exception as e:
+    print(f"Error creating versions directory: {e}")
+    return None
+
+  with local():
     try:
-        local("mkdir -p versions")
-        timestamp = time.strftime("%Y%m%d%H%M%S")
-        local("tar -cvzf versions/web_static_{timestamp}.tgz web_static/")
-        return ("versions/web_static_{timestamp}.tgz")
-    except:
-        return None
+      local(f"tar -czvf {archive_path} web_static/*")
+      return archive_path
+    except Exception as e:
+      print(f"Error creating archive: {e}")
+      return None
