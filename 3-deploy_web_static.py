@@ -45,18 +45,14 @@ def do_deploy(archive_path):
         run(f"sudo rm -rf {newest_version}/web_static")
         run("sudo rm -rf /data/web_static/current")
         run(f"sudo ln -s {newest_version} /data/web_static/current")
-
-        print("New version deployed!")
         return True
     else:
-        print(f"{archive_path} does not exist")
         return False
 
 
 def deploy():
-    """Create and distributes an archive to web servers"""
-    try:
-        path = do_pack()
-        return do_deploy(path)
-    except:
+    """creates and distributes an archive to the web servers"""
+    path = do_pack()
+    if path is None:
         return False
+    return do_deploy(path)
