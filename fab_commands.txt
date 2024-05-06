@@ -12,3 +12,10 @@ Task 4:
 
 Task 5:
 >>>>>
+ssh ubuntu@54.209.222.176 'sudo bash -s' < script_file
+
+
+
+tests
+>>> curl 100.25.109.49/hbnb_static/0-index.html
+>>> curl 54.209.222.176/hbnb_static/0-index.html
