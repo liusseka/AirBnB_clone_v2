@@ -8,11 +8,12 @@
 from datetime import datetime
 from fabric.api import local
 
+
 def do_pack():
     """Generates a tgz archive from web_static folder."""
 
     try:
-        #define time
+        # define time
         now = datetime.utcnow()
         timestamp = now.strftime('%Y%m%d%H%M%S')
 
@@ -26,5 +27,6 @@ def do_pack():
         # Create archive
         local(f"tar -cvzf {archive_path} web_static/")
         return archive_path
-    except:
+    except FileNotFoundError:
+        print("Error: The file does not exist.")
         return None
