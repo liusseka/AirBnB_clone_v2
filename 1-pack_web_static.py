@@ -1,32 +1,24 @@
 #!/usr/bin/python3
-"""
-The Script does the following:
+"""The Script does the following:
     - Generates a .tgz archive from the contents of the web_static folder,
-    - Uses using the function do_pack,
+    - Uses the function do_pack,
     - Adds all files in the folder web_static to the final archive,
-    - Stores all archives in the folder versions
+    - Stores all archives in the folder 'versions'
 """
 from datetime import datetime
-from fabric.api import env, local, mkdir, run
+from fabric.api import local
 
 
 def do_pack():
+    """Generates a tgz archive from web_static folder."""
     now = datetime.utcnow()
     timestamp = now.strftime('%Y%m%d%H%M%S')
-
     archive_name = f"web_static_{timestamp}.tgz"
     archive_path = f"versions/{archive_name}"
 
-    try:
-        run("mkdir -p versions")
-    except Exception as e:
-        print(f"Error creating versions directory: {e}")
-        return None
+    # Create versions directory if it doesn't exist
+    local("mkdir -p versions")
 
-    with local():
-        try:
-            local(f"tar -czvf {archive_path} web_static/*")
-            return archive_path
-        except Exception as e:
-            print(f"Error creating archive: {e}")
-            return None
+    # Create archive
+    local(f"tar -czvf {archive_path} web_static/")
+    return archive_path
