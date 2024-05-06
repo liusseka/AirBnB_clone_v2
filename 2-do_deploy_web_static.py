@@ -69,6 +69,8 @@ def do_deploy(archive_path):
         run(f'rm -rf /data/web_static/current')
         run(f'ln -s {release_path}{base_name}/ /data/web_static/current')
 
+        # Finalizing
+        echo 'New Version deployed'
         return True
 
     except FileNotFoundError:

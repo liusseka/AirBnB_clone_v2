@@ -1,6 +1,0 @@
-Task 2:
->>>>> fab -f 2-do_deploy_web_static.py do_deploy:archive_path=versions/web_static_20240506153056.tgz -i ~/.ssh/od_rsa -u ubuntu
-
-
-Task 3:
->>>>> fab -f 3-deploy_web_static.py deploy -i ~/.ssh/od_rsa -u ubuntu
