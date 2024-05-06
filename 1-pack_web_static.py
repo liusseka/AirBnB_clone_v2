@@ -6,14 +6,12 @@ The Script does the following:
  - Adds all files in the folder web_static to the final archive,
  - Stores all archives in the folder versions
 """
-
 from datetime import datetime
 from fabric.api import env, local, mkdir, run
 
 def do_pack():
-
 	"""
-  	Generates a .tgz archive of web_static contents and returns its path.
+  	Generates a tgz archive of web_static contents and returns its path.
   	"""
   	now = datetime.utcnow()
   	timestamp = now.strftime('%Y%m%d%H%M%S')
