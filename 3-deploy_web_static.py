@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Create and distributes an archive to web servers"""
 import os.path
-import time
+from datetime import datetime
 from fabric.api import local
 from fabric.operations import env, put, run
 
@@ -19,7 +19,7 @@ def do_pack():
 
     # Archive Files
     archive_name = f"web_static_{timestamp}.tgz"
-    archive_path = f"versions/{archive_name}"
+    archive_path = os.path.join("versions", archive_name)
 
     # Create archive
     gzip_file = local(f"tar -czvf {archive_path} web_static/")
@@ -35,9 +35,9 @@ def do_deploy(archive_path):
         Distributes the archive to the web servers.
     """
     if os.path.exists(archive_path):
-        archived_file = archive_path[9:]
-        newest_version = "/data/web_static/releases/" + archived_file[:-4]
-        archived_file = "/tmp/" + archived_file
+        archived_file = os.path.basename(archive_path)
+        newest_version = f"/data/web_static/releases/{archived_file[:-4]}"
+        archived_file = f"/tmp/{archived_file}"
         put(archive_path, "/tmp/")
         run(f"sudo mkdir -p {newest_version}")
         run(f"sudo tar -xzf {archived_file} -C {newest_version}/")
