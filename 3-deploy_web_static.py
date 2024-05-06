@@ -41,8 +41,10 @@ def do_deploy(archive_path):
         run(f"sudo mkdir -p {newest_version}")
         run(f"sudo tar -xzf {archived_file} -C {newest_version}/")
         run(f"sudo rm {archived_file}")
-        run(f"sudo mv {newest_version}/web_static/* {newest_version}")
+        run(f"sudo mv {newest_version}/web_static/* /data/web_static/")
         run(f"sudo rm -rf {newest_version}/web_static")
+        # run(f"sudo mv {newest_version}/web_static/* {newest_version}")
+        # run(f"sudo rm -rf {newest_version}/web_static")
         run("sudo rm -rf /data/web_static/current")
         run(f"sudo ln -s {newest_version} /data/web_static/current")
 
