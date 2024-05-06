@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # The script configures web servers for deployment with
 
 # Update packages and install Nginx, if it does not exist
