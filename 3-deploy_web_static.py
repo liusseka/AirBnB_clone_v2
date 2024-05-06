@@ -9,15 +9,26 @@ env.users = 'ubuntu'
 
 
 def do_pack():
-    """Creates a .tgz archive"""
+    """Generates a tgz archive from web_static folder."""
+
     try:
-        date = datetime.now().strftime("%Y%m%d%H%M%S")
-        if isdir("versions") is False:
-            local("mkdir versions")
-        file_name = "versions/web_static_{}.tgz".format(date)
-        local("tar -cvzf {} web_static".format(file_name))
-        return file_name
-    except:
+        # define time
+        now = datetime.utcnow()
+        timestamp = now.strftime('%Y%m%d%H%M%S')
+
+        # defile file name and path
+        archive_name = f"web_static_{timestamp}.tgz"
+        archive_path = f"versions/{archive_name}"
+
+        # Create versions directory if it doesn't exist
+        local("mkdir -p versions")
+
+        # Create archive
+        local(f"tar -cvzf {archive_path} web_static/")
+        return archive_path
+
+    except FileNotFoundError:
+        print("Error: The file does not exist.")
         return None
 
 def do_deploy(archive_path):

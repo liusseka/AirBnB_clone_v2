@@ -27,6 +27,7 @@ def do_pack():
         # Create archive
         local(f"tar -cvzf {archive_path} web_static/")
         return archive_path
+
     except FileNotFoundError:
         print("Error: The file does not exist.")
         return None
