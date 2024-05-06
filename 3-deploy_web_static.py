@@ -4,7 +4,6 @@ import os
 from datetime import datetime
 from fabric.api import local, env, put, run
 env.hosts = ['100.25.109.49', '54.209.222.176']
-env.users = 'ubuntu'
 
 
 def do_pack():
@@ -30,9 +29,10 @@ def do_pack():
         print("Error: The file does not exist.")
         return None
 
+
 def do_deploy(archive_path):
     """Uploads the archive to web servers"""
-    if exists(archive_path) is False:
+    if not os.path.exists(archive_path) is False:
         return False
 
     try:
