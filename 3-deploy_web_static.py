@@ -48,8 +48,9 @@ def do_deploy(archive_path):
 
         print("New version deployed!")
         return True
-
-    return False
+    else:
+        print(f"{archive_path} does not exist")
+        return False
 
 
 def deploy():
