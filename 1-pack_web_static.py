@@ -10,21 +10,13 @@ from fabric.api import local
 
 
 def do_pack():
-    """Generates a tgz archive from web_static folder."""
-    now = datetime.utcnow()
-    timestamp = now.strftime('%Y%m%d%H%M%S')
-
-    # Create versions directory if it doesn't exist
-    local("mkdir -p versions")
-
-    # Archive Files
-    archive_name = f"web_static_{timestamp}.tgz"
-    archive_path = os.path.join("versions", archive_name)
-
-    # Create archive
-    gzip_file = local(f"tar -czvf {archive_path} web_static/")
-
-    if gzip_file.succeeded:
-        return archived_path
-    else:
+    """Creates a .tgz archive"""
+    try:
+        date = datetime.now().strftime("%Y%m%d%H%M%S")
+        if isdir("versions") is False:
+            local("mkdir versions")
+        file_name = "versions/web_static_{}.tgz".format(date)
+        local("tar -cvzf {} web_static".format(file_name))
+        return file_name
+    except:
         return None
