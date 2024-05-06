@@ -7,7 +7,6 @@
 import os
 from datetime import datetime
 from fabric.api import *
-
 env.hosts = ['100.25.109.49', '54.209.222.176']
 
 
@@ -37,9 +36,9 @@ def do_deploy(archive_path):
         Distributes the archive to the web servers.
     """
     if os.path.exists(archive_path):
-        archived_file = archive_path[9:]
-        newest_version = "/data/web_static/releases/" + archived_file[:-4]
-        archived_file = "/tmp/" + archived_file
+        archived_file = os.path.basename(archive_path)
+        newest_version = f"/data/web_static/releases/{archived_file[:-4]}"
+        archived_file = f"/tmp/{archived_file}"
         put(archive_path, "/tmp/")
         run(f"sudo mkdir -p {newest_version}")
         run(f"sudo tar -xzf {archived_file} -C {newest_version}/")
