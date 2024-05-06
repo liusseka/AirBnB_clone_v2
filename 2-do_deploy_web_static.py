@@ -11,20 +11,6 @@ from fabric.api import *
 env.user = "ubuntu"
 env.hosts = ["100.25.109.49", "54.209.222.176"]
 
-def do_pack():
-    """
-        Returns .tgz if generated correctly.
-    """
-
-    local("mkdir -p versions")
-    date = datetime.now().strftime("%Y%m%d%H%M%S")
-    archived_f_path = "versions/web_static_{}.tgz".format(date)
-    t_gzip_archive = local("tar -cvzf {} web_static".format(archived_f_path))
-
-    if t_gzip_archive.succeeded:
-        return archived_f_path
-    else:
-        return None
 
 def do_pack():
     """Generates a tgz archive from web_static folder."""
