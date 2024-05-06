@@ -75,6 +75,11 @@ def do_deploy(archive_path):
 def deploy():
     """creates and distributes an archive to the web servers"""
     archive_path = do_pack()
-    if archive_path is None:
+
+    # Check if archive file exists
+    if os.path.exists(archive_path):
+        print("No archive file found")
         return False
+
+    # deploy archiv to web servers
     return do_deploy(archive_path)
