@@ -36,7 +36,7 @@ def do_pack():
 
 def do_deploy(archive_path):
     """Uploads the archive to web servers"""
-    if exists(archive_path) is False:
+    if not os.path.exists(archive_path):
         return False
 
     try:
