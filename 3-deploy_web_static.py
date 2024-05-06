@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Create and distributes an archive to web servers"""
-import os.path
+import os
 from datetime import datetime
 from fabric.api import local, env, put, run
-from os.path import exists, isdir
 env.hosts = ['100.25.109.49', '54.209.222.176']
 env.users = 'ubuntu'
 
@@ -35,20 +34,41 @@ def do_deploy(archive_path):
     """Uploads the archive to web servers"""
     if exists(archive_path) is False:
         return False
+
     try:
-        file_n = archive_path.split("/")[-1]
-        no_ext = file_n.split(".")[0]
-        path = "/data/web_static/releases/"
+        # Extract the file name from the archive path without extension
+        file_name = os.path.basename(archive_path)
+        base_name = file_name.split(".")[0]
+
+        # Define the target directory path for the releases
+        release_path = "/data/web_static/releases/"
+
+        # Upload the archive to the temporary location on the server
         put(archive_path, '/tmp/')
-        run('mkdir -p {}{}/'.format(path, no_ext))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_n, path, no_ext))
-        run('rm /tmp/{}'.format(file_n))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
-        run('rm -rf {}{}/web_static'.format(path, no_ext))
-        run('rm -rf /data/web_static/current')
-        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
+
+        # Prepare the release directory
+        run(f'mkdir -p {release_path}{base_name}/')
+
+        # Extract the archive into the release directory
+        run(f'tar -xzf /tmp/{file_name} -C {release_path}{base_name}/')
+
+        # Remove the archive from the temporary location
+        run(f'rm /tmp/{file_name}')
+
+        # Move the contents from web_static subfolder to releases' base directory
+        run(f'mv {release_path}{base_name}/web_static/* {release_path}{base_name}/')
+
+        # Remove the now-empty subdirectory
+        run(f'rm -rf {release_path}{base_name}/web_static')
+
+        # Remove the current symbolic link 
+        run(f'rm -rf /data/web_static/current')
+        run(f'ln -s {release_path}{base_name}/ /data/web_static/current')
+
         return True
-    except:
+
+    except FileNotFoundError:
+        print(" Error: Archive Path Does Not Exist")
         return False
 
 
