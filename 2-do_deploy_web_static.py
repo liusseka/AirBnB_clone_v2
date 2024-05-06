@@ -26,6 +26,27 @@ def do_pack():
     else:
         return None
 
+def do_pack():
+    """Generates a tgz archive from web_static folder."""
+    now = datetime.utcnow()
+    timestamp = now.strftime('%Y%m%d%H%M%S')
+
+    # Create versions directory if it doesn't exist
+    local("mkdir -p versions")
+
+    # Archive Files
+    archive_name = f"web_static_{timestamp}.tgz"
+    archive_path = f"versions/{archive_name}"
+
+    # Create archive
+    gzip_file = local(f"tar -czvf {archive_path} web_static/")
+
+    if gzip_file.succeeded:
+        return archived_path
+    else:
+        return None
+
+
 def do_deploy(archive_path):
     """
         Distributes the archive to the web servers.
