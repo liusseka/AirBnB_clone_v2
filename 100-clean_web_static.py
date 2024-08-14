@@ -1,23 +1,27 @@
 #!/usr/bin/python3
-""" Function that cleans unnessecaru archives """
+""" Function that cleans unnessecary archives """
 from fabric.api import *
+import os
 
-env.hosts = ['44.210.150.159', '35.173.47.15']
-env.user = "ubuntu"
+env.hosts = ['18.233.66.208', '18.235.248.134']
 
 def do_clean(number=0):
-    """ cleans a certain number of archives """
+    """Delete out-of-date archives.
+    Args:
+        number (int): The number of archives to keep.
+    If number is 0 or 1, keeps only the most recent archive. If
+    number is 2, keeps the most and second-most recent archives,
+    etc.
+    """
+    number = 1 if int(number) == 0 else int(number)
 
-    # define number
-    number = int(number)
-    if number == 0:
-        number = 2
-    else:
-        number += 1
+    archives = sorted(os.listdir("versions"))
+    [archives.pop() for i in range(number)]
+    with lcd("versions"):
+        [local("rm ./{}".format(a)) for a in archives]
 
-    # Local clean up
-    local(f'cd versions ; ls -t | tail -n +{number} | xargs rm -rf')
-
-    # Remote clean up
-    path = f'/data/web_static/releases'
-    run(f'cd {path} ; ls -t | tail -n +{number} | xargs rm -rf')
+    with cd("/data/web_static/releases"):
+        archives = run("ls -tr").split()
+        archives = [a for a in archives if "web_static_" in a]
+        [archives.pop() for i in range(number)]
+        [run("rm -rf ./{}".format(a)) for a in archives]
