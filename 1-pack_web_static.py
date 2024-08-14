@@ -7,9 +7,7 @@
 """
 from datetime import datetime
 from fabric.api import *
-from fabric import task
 
-@task
 def do_pack():
     """Generates a tgz archive from web_static folder."""
 
