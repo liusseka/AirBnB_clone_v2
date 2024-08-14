@@ -6,18 +6,18 @@ sudo apt update -y
 sudo apt install -y nginx
 
 # create web_static folder inside data folder
-mkdir -p /data/web_static/
+sudo mkdir -p /data/web_static/
 
 # Create folders /releases and /shared inside /web_static
-mkdir -p /data/web_static/releases/ /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/ /data/web_static/shared/
 
 # Create the folder /test inside /releases
-mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/releases/test/
 
 # Create a fake html file inside test
-touch /data/web_static/releases/test/index.html
+sudo touch /data/web_static/releases/test/index.html
 
-echo "
+sudo echo "
 <!DOCTYPE html>
 <html>
   <head>
@@ -32,10 +32,10 @@ echo "
 # removing (if it exists) and creating a symbolic link
 if [ -f "/data/web_static/current" ];
 then
-	rm "/data/web_static/current"
+	sudo rm "/data/web_static/current"
 fi
 
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Changing ownwership to ubuntu user and group
 sudo chown -R ubuntu:ubuntu /data/

@@ -6,15 +6,16 @@
     - Stores all archives in the folder 'versions'
 """
 from datetime import datetime
-from fabric.api import local
+from fabric.api import *
+from fabric import task
 
-
+@task
 def do_pack():
     """Generates a tgz archive from web_static folder."""
 
     try:
         # define time
-        now = datetime.utcnow()
+        now = datetime.now()
         timestamp = now.strftime('%Y%m%d%H%M%S')
 
         # defile file name and path
